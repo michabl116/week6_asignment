@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git Branch : 'master ' , url: 'https://github.com/michabl116/week6_asignment.git'
+                git branch : 'master' , url: 'https://github.com/michabl116/week6_asignment.git'
             }
         }
         stage('Build') {
