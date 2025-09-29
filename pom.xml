@@ -20,9 +20,12 @@
             <version>5.8.1</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
     <build>
+        <finalName>caljar</finalName>
         <plugins>
+
             <!-- Plugin de compilación -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -32,6 +35,15 @@
                     <release>17</release>
                 </configuration>
             </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.1.2</version>
+                <configuration>
+                    <useModulePath>false</useModulePath> <!-- Necesario para JUnit 5 -->
+                </configuration>
+            </plugin>
+
+
 
             <!-- Plugin de JaCoCo para cobertura -->
             <plugin>
