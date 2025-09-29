@@ -12,21 +12,23 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <junit.version>5.9.3</junit.version>
     </properties>
+
     <dependencies>
+        <!-- JUnit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>5.8.1</version>
+            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-    <build>
-        <finalName>caljar</finalName>
-        <plugins>
 
-            <!-- Plugin de compilación -->
+    <build>
+        <finalName>Temp</finalName>
+        <plugins>
+            <!-- Compilador Java -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -35,17 +37,30 @@
                     <release>17</release>
                 </configuration>
             </plugin>
+
+            <!-- Pruebas unitarias -->
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
-                    <useModulePath>false</useModulePath> <!-- Necesario para JUnit 5 -->
+                    <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>
 
+            <!-- Empaquetado en JAR ejecutable -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>org.example.App</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 
-
-            <!-- Plugin de JaCoCo para cobertura -->
+            <!-- Cobertura de código con JaCoCo -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -63,12 +78,15 @@
                         <goals>
                             <goal>report</goal>
                         </goals>
+                        <configuration>
+                            <excludes>
+                                <exclude>jdk/*</exclude>
+                                <exclude>sun/*</exclude>
+                            </excludes>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
-
-
 </project>
